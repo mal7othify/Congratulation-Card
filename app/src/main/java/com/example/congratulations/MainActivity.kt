@@ -1,33 +1,33 @@
 package com.example.congratulations
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.congratulations.ui.CongratulationsTheme
-import com.example.congratulations.ui.typography
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CongratulationsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Screen()
-                }
+                Screen()
             }
         }
     }
@@ -37,13 +37,14 @@ class MainActivity : AppCompatActivity() {
 fun Screen() {
     Scaffold(
         topBar = {
-            TopAppBar {
-                Text(
-                    text = stringResource(id = R.string.app_name),
-                    style = typography.h1,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-            }
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        color = MaterialTheme.colors.onPrimary
+                    )
+                }
+            )
         }
     ) {
         Content()
@@ -53,8 +54,10 @@ fun Screen() {
 @Composable
 fun Content() {
     Image(
-        bitmap = imageResource(id = R.drawable.androidparty),
-        contentScale = ContentScale.Crop
+        bitmap = ImageBitmap.imageResource(id = R.drawable.androidparty),
+        contentScale = ContentScale.Crop,
+        contentDescription = null,
+        modifier = Modifier.fillMaxSize()
     )
     Box(
         modifier = Modifier.fillMaxSize().padding(16.dp)
